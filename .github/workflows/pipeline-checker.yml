@@ -1,0 +1,64 @@
+name: pipeline-checker
+on: [workflow_dispatch, push, pull_request]
+
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install --save-dev htmlhint stylelint-config-standard stylelint eslint@8
+
+      - name: Fix permissions for htmlhint
+        run: chmod +x ./node_modules/.bin/htmlhint
+
+      - name: Run HTMLHint
+        id: htmlhint
+        run: npx htmlhint **/*.html
+        continue-on-error: true
+
+      - name: Fix permissions for stylelint
+        run: chmod +x ./node_modules/.bin/stylelint
+
+      - name: Run Stylelint
+        id: stylelint
+        run: npx stylelint **/*.css
+        continue-on-error: true
+
+      - name: Fix permissions for ESLint
+        run: chmod +x ./node_modules/.bin/eslint
+
+      - name: Run ESLint
+        id: eslint
+        run: npx eslint . --ext .js,.ts
+        continue-on-error: true
+
+      - name: HTMLHint passed?
+        if: steps.htmlhint.outcome == 'success'
+        run: echo "HTMLHint completed successfully, no errors found!"
+
+      - name: HTMLHint failed?
+        if: steps.htmlhint.outcome == 'failure'
+        run: echo "HTMLHint failed, please check the errors!"
+
+      - name: Stylelint passed?
+        if: steps.stylelint.outcome == 'success'
+        run: echo "Stylelint completed successfully, no errors found!"
+
+      - name: Stylelint failed?
+        if: steps.stylelint.outcome == 'failure'
+        run: echo "Stylelint failed, please check the errors!"
+
+      - name: ESLint passed?
+        if: steps.eslint.outcome == 'success'
+        run: echo "ESLint completed successfully, no errors found!"
+
+      - name: ESLint failed?
+        if: steps.eslint.outcome == 'failure'
+        run: echo "ESLint found issues. Please fix them!"
+
+
