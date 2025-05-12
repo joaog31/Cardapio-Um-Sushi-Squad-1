@@ -13,6 +13,7 @@ Para que qualquer pessoa, técnica ou não técnica, consiga entender o propósi
 [Breno Glauber Oliveira Viana](https://github.com/Breno-Viana)\
 [Carlos Bernardo Gôes Dos Santos](https://github.com/BernaGS)\
 [Elizandra Maria Silva Barreto Dos Santos](https://github.com/Elizandrxm)\
+[Leonardo Cruz de Jesus](https://github.com/LeonardoC-Jesus/)\
 [Gabriel Câncio Simplício Dos Santos](https://github.com/G-cancio)\
 [João Gabriel Da Costa Oliveira](https://github.com/joaog31)\
 [João Paulo Viana Macedo de Azevedo](https://github.com/joaopauloazeved)
