@@ -15,7 +15,7 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: npm install --save-dev htmlhint stylelint-config-standard stylelint eslint@8 jest @types/jest ts-jest vite
+        run: npm install --save-dev htmlhint stylelint-config-standard stylelint eslint@8 jest @types/jest ts-jest vite eslint-plugin-jest
 
       # Linting
       - name: Fix permissions for htmlhint

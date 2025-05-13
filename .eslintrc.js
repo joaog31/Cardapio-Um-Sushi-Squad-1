@@ -2,8 +2,10 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true
+    node: true,
+    jest: true,
   },
+  plugins: ['jest'],
   extends: ['eslint:recommended'],
   parserOptions: {
     ecmaVersion: 12,
@@ -18,4 +20,3 @@ module.exports = {
     'indent': ['error', 2]
   }
 };
-  
