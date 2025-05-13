@@ -1,4 +1,4 @@
-# Cardapio um Sushi
+# Cardapio um SUSHI
 Esse repositorio servirá para armazenar os arquivos de códigos do projeto Cardápio Um sushi..
 Como desenvolvedor responsável pela documentação inicial do projeto
 Quero criar e estruturar o arquivo README.md contendo o nome de todos os participantes, descrição do projeto e instruções claras de execução local
