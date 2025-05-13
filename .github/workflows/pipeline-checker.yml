@@ -56,13 +56,6 @@ jobs:
         if: steps.tests.outcome == 'failure'
         run: echo "Tests failed, please check the errors!"
 
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v3
-        if: steps.tests.outcome == 'success'
-        with:
-          name: coverage-report
-          path: coverage/
-
       # Segurança
       - name: Run npm audit
         id: npm-audit
