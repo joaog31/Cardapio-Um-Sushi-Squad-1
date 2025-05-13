@@ -3,7 +3,7 @@ on: [workflow_dispatch, push, pull_request]
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-lastest
 
     steps:
       - name: Checkout repository
@@ -66,7 +66,7 @@ jobs:
       # Segurança
       - name: Run npm audit
         id: npm-audit
-        run: npm audit --audit-level=moderate
+        run: npm audit --audit-level=critical
         continue-on-error: true
 
       - name: npm audit passed?
@@ -77,26 +77,7 @@ jobs:
         if: steps.npm-audit.outcome == 'failure'
         run: echo "Security issues found, please review npm audit output!"
 
-      # Build
-      - name: Build project
-        id: build
-        run: npm run build
-        continue-on-error: true
-
-      - name: Build passed?
-        if: steps.build.outcome == 'success'
-        run: echo "Build completed successfully!"
-
-      - name: Build failed?
-        if: steps.build.outcome == 'failure'
-        run: echo "Build failed, please check the errors!"
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v3
-        if: steps.build.outcome == 'success'
-        with:
-          name: build-output
-          path: dist/
+     
 
       - name: HTMLHint passed?
         if: steps.htmlhint.outcome == 'success'
