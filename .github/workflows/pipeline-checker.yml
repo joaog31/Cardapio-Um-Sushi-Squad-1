@@ -44,8 +44,8 @@ jobs:
 
       - name: Fix permissions for Jest
         run: chmod +x ./node_modules/.bin/jest
-        
-      - name: Run Tests
+
+      - name: Run Jest
         id: tests
         run: npx jest --coverage
         continue-on-error: true
@@ -54,6 +54,22 @@ jobs:
         id: npm-audit
         run: npm audit --audit-level=critical
         continue-on-error: true
+
+      - name: Fix permissions for Vite
+        run: chmod +x ./node_modules/.bin/vite
+
+      - name: Run Vite
+        id: vite
+        run: npx vite build
+        continue-on-error: true
+
+      - name: Build passed?
+        if: steps.vite.outcome == 'success'
+        run: echo "Build completed successfully!"
+
+      - name: Build failed?
+        if: steps.vite.outcome == 'failure'
+        run: echo "Build failed, please check the errors!"
 
       - name: Tests passed?
         if: steps.tests.outcome == 'success'
