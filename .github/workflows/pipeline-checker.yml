@@ -3,7 +3,7 @@ on: [workflow_dispatch, push, pull_request]
 
 jobs:
   check:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
