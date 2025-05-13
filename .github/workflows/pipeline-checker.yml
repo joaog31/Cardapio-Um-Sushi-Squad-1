@@ -42,10 +42,17 @@ jobs:
         run: npx eslint . --ext .js,.ts
         continue-on-error: true
 
-      # Testes
+      - name: Fix permissions for Jest
+        run: chmod +x ./node_modules/.bin/jest
+        
       - name: Run Tests
         id: tests
         run: npx jest --coverage
+        continue-on-error: true
+
+      - name: Run npm audit
+        id: npm-audit
+        run: npm audit --audit-level=critical
         continue-on-error: true
 
       - name: Tests passed?
@@ -56,12 +63,6 @@ jobs:
         if: steps.tests.outcome == 'failure'
         run: echo "Tests failed, please check the errors!"
 
-      # Segurança
-      - name: Run npm audit
-        id: npm-audit
-        run: npm audit --audit-level=critical
-        continue-on-error: true
-
       - name: npm audit passed?
         if: steps.npm-audit.outcome == 'success'
         run: echo "No security issues found!"
@@ -69,8 +70,6 @@ jobs:
       - name: npm audit failed?
         if: steps.npm-audit.outcome == 'failure'
         run: echo "Security issues found, please review npm audit output!"
-
-     
 
       - name: HTMLHint passed?
         if: steps.htmlhint.outcome == 'success'
