@@ -1,7 +1,6 @@
 name: pipeline-checker
 on: [workflow_dispatch, push, pull_request]
 
-
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -10,9 +9,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: npm install --save-dev htmlhint stylelint-config-standard stylelint eslint@8
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
 
+      - name: Install dependencies
+        run: npm install --save-dev htmlhint stylelint-config-standard stylelint eslint@8 jest @types/jest ts-jest vite
+
+      # Linting
       - name: Fix permissions for htmlhint
         run: chmod +x ./node_modules/.bin/htmlhint
 
@@ -37,6 +42,62 @@ jobs:
         run: npx eslint . --ext .js,.ts
         continue-on-error: true
 
+      # Testes
+      - name: Run Tests
+        id: tests
+        run: npx jest --coverage
+        continue-on-error: true
+
+      - name: Tests passed?
+        if: steps.tests.outcome == 'success'
+        run: echo "Tests completed successfully!"
+
+      - name: Tests failed?
+        if: steps.tests.outcome == 'failure'
+        run: echo "Tests failed, please check the errors!"
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        if: steps.tests.outcome == 'success'
+        with:
+          name: coverage-report
+          path: coverage/
+
+      # Segurança
+      - name: Run npm audit
+        id: npm-audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+      - name: npm audit passed?
+        if: steps.npm-audit.outcome == 'success'
+        run: echo "No security issues found!"
+
+      - name: npm audit failed?
+        if: steps.npm-audit.outcome == 'failure'
+        run: echo "Security issues found, please review npm audit output!"
+
+      # Build
+      - name: Build project
+        id: build
+        run: npm run build
+        continue-on-error: true
+
+      - name: Build passed?
+        if: steps.build.outcome == 'success'
+        run: echo "Build completed successfully!"
+
+      - name: Build failed?
+        if: steps.build.outcome == 'failure'
+        run: echo "Build failed, please check the errors!"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        if: steps.build.outcome == 'success'
+        with:
+          name: build-output
+          path: dist/
+
       - name: HTMLHint passed?
         if: steps.htmlhint.outcome == 'success'
         run: echo "HTMLHint completed successfully, no errors found!"
@@ -60,5 +121,3 @@ jobs:
       - name: ESLint failed?
         if: steps.eslint.outcome == 'failure'
         run: echo "ESLint found issues. Please fix them!"
-
-
