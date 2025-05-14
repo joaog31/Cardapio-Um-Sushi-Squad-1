@@ -62,6 +62,13 @@ jobs:
         run: npx vite build --mode production
         continue-on-error: true
 
+      - name: Upload coverage folder as artifact
+        if: steps.tests.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-artifact
+          path: coverage/
+
       - name: Upload dist folder as artifact
         if: steps.vite.outcome == 'success'
         uses: actions/upload-artifact@v4
