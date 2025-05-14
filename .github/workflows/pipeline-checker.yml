@@ -59,32 +59,30 @@ jobs:
 
       - name: Run Vite Build
         id: vite
-        run: |
-          # Rodar o build com Vite
-          npx vite build --mode production
+        run: npx vite build --mode production
         continue-on-error: true
 
-      - name: Build passed?
+      - name: Vite Build passed?
         if: steps.vite.outcome == 'success'
         run: echo "Build completed successfully!"
 
-      - name: Build failed?
+      - name: Vite Build failed?
         if: steps.vite.outcome == 'failure'
         run: echo "Build failed, please check the errors!"
 
-      - name: Tests passed?
+      - name: Jest passed?
         if: steps.tests.outcome == 'success'
         run: echo "Tests completed successfully!"
 
-      - name: Tests failed?
+      - name: Jest failed?
         if: steps.tests.outcome == 'failure'
         run: echo "Tests failed, please check the errors!"
 
-      - name: npm audit passed?
+      - name: NPM Audit passed?
         if: steps.npm-audit.outcome == 'success'
         run: echo "No security issues found!"
 
-      - name: npm audit failed?
+      - name: NPM Audit failed?
         if: steps.npm-audit.outcome == 'failure'
         run: echo "Security issues found, please review npm audit output!"
 
