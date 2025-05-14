@@ -30,7 +30,7 @@ jobs:
 
       - name: Run Stylelint
         id: stylelint
-        run: npx stylelint "**/*.css" --ignore "coverage/**"
+        run: npx stylelint '**/*.css' --ignore-pattern "coverage/**"
         continue-on-error: true
 
       - name: Fix permissions for ESLint
@@ -57,9 +57,11 @@ jobs:
       - name: Fix permissions for Vite
         run: chmod +x ./node_modules/.bin/vite
 
-      - name: Run Vite
+      - name: Run Vite Build
         id: vite
-        run: npx vite build
+        run: |
+          # Rodar o build com Vite
+          npx vite build --mode production
         continue-on-error: true
 
       - name: Build passed?
