@@ -7,10 +7,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
 
@@ -22,7 +22,7 @@ jobs:
 
       - name: Run HTMLHint
         id: htmlhint
-        run: npx htmlhint **/*.html
+        run: npx htmlhint "**/*.html" --ignore "coverage/**"
         continue-on-error: true
 
       - name: Fix permissions for stylelint
@@ -30,7 +30,7 @@ jobs:
 
       - name: Run Stylelint
         id: stylelint
-        run: npx stylelint **/*.css
+        run: npx stylelint "**/*.css" --ignore "coverage/**"
         continue-on-error: true
 
       - name: Fix permissions for ESLint
@@ -38,7 +38,7 @@ jobs:
 
       - name: Run ESLint
         id: eslint
-        run: npx eslint . --ext .js,.ts
+        run: npx eslint "**/*.{js,ts}" --ignore-pattern "coverage/**"
         continue-on-error: true
 
       - name: Fix permissions for Jest
