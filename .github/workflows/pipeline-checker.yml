@@ -62,6 +62,13 @@ jobs:
         run: npx vite build --mode production
         continue-on-error: true
 
+      - name: Upload dist folder as artifact
+        if: steps.vite.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-artifact
+          path: dist/
+
       - name: Vite Build passed?
         if: steps.vite.outcome == 'success'
         run: echo "Build completed successfully!"
