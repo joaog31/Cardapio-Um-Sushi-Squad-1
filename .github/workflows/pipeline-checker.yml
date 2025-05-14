@@ -51,7 +51,7 @@ jobs:
 
       - name: Run npm audit
         id: npm-audit
-        run: npm audit --audit-level=critical
+        run: npm audit --audit-level=low
         continue-on-error: true
 
       - name: Fix permissions for Vite
