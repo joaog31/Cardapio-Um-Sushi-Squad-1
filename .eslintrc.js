@@ -5,18 +5,23 @@ module.exports = {
     node: true,
     jest: true,
   },
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
+    requireConfigFile: false,
+  },
   plugins: ['jest'],
   extends: ['eslint:recommended'],
-  parserOptions: {
-    ecmaVersion: 12,
-    sourceType: 'module'
-  },
   rules: {
     'no-console': 'warn',
     'eqeqeq': 'error',
     'curly': 'error',
     'quotes': ['error', 'single'],
     'semi': ['error', 'always'],
-    'indent': ['error', 2]
-  }
+    'indent': ['error', 2],
+  },
 };
