@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Cardapio um Sushi
+Esse repositorio servirá para armazenar os arquivos de códigos do projeto Cardápio Um sushi..
+Como desenvolvedor responsável pela documentação inicial do projeto
+Quero criar e estruturar o arquivo README.md contendo o nome de todos os participantes, descrição do projeto e instruções claras de execução local
+Para que qualquer pessoa, técnica ou não técnica, consiga entender o propósito do sistema e executar o projeto com facilidade em seu ambiente
 
-## Getting Started
+<br>
 
-First, run the development server:
+# Participante do Grupo:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+[Andre Francisco Araujo Meirelles](https://github.com/AndreMeirelles1)\
+[Anísio Oliveira Albuquerque Filho](https://github.com/Lugarty)\
+[Breno Glauber Oliveira Viana](https://github.com/Breno-Viana)\
+[Carlos Bernardo Gôes Dos Santos](https://github.com/BernaGS)\
+[Elizandra Maria Silva Barreto Dos Santos](https://github.com/Elizandrxm)\
+[Leonardo Cruz de Jesus](https://github.com/LeonardoC-Jesus/)\
+[Gabriel Câncio Simplício Dos Santos](https://github.com/G-cancio)\
+[João Gabriel Da Costa Oliveira](https://github.com/joaog31)\
+[João Paulo Viana Macedo de Azevedo](https://github.com/joaopauloazeved)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br>
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+# Descrição do projeto:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- O projeto serve para criar um site para uma cliente no qual ela precisa exibir e organizar o seu cardápio de comida, no estilo de empresas tipo "[Ifood](https://www.ifood.com.br/restaurantes?srsltid=AfmBOooOsb9LOQKUwABu9QNf_uTJJ7Yjl78Wn7lqC8z3fVXkqlLK-f5-)" e "[Rappi](https://www.rappi.com.br)", onde contenha foto do produto, preço do produto,
+avaliação do produto onde geralmente é usado uma nota de 1 a 5 estrelas e um espaço de texto onde o usúario consiga dar um feedback sobre a comida.
+<br>
+<br>
 
-## Learn More
+![Exemplo](https://s.zst.com.br/cms-assets/2021/09/como-fazer-pedido-no-ifood-1.jpg)
+<br>
+<br>
+<br>
+<br>
+<br>
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> [!important]
+> Tecnologias usadas.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Tecnologia | Descrição |
+| --- | --- |
+| Pipeline | Foi utilizado, [`Stylelint`](https://stylelint.io/) com parâmetros configurados em **JavaScript**, [`HTMLHint`](https://htmlhint.com/) com parâmetros configurados em **JSON**, [`ESLint`](https://eslint.org/) com parâmetros em **JSON**  além de um arquivo em **Yaml** para o workflow. |
 
-## Deploy on Vercel
+<br>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> [!warning]
+> O projeto ainda está incompleto.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
