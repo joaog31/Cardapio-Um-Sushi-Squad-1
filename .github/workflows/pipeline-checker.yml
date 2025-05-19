@@ -15,7 +15,7 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: npm install --save-dev htmlhint stylelint-config-standard stylelint eslint@8 jest @types/jest ts-jest vite eslint-plugin-jest
+        run: npm install htmlhint stylelint-config-standard stylelint eslint@8 jest @types/jest ts-jest vite eslint-plugin-jest
 
       - name: Fix permissions for htmlhint
         run: chmod +x ./node_modules/.bin/htmlhint
@@ -23,7 +23,6 @@ jobs:
       - name: Run HTMLHint
         id: htmlhint
         run: npx htmlhint "**/*.html" --ignore "coverage/**"
-        continue-on-error: true
 
       - name: Fix permissions for stylelint
         run: chmod +x ./node_modules/.bin/stylelint
@@ -31,7 +30,6 @@ jobs:
       - name: Run Stylelint
         id: stylelint
         run: npx stylelint '**/*.css' --ignore-pattern "coverage/**"
-        continue-on-error: true
 
       - name: Fix permissions for ESLint
         run: chmod +x ./node_modules/.bin/eslint
@@ -39,7 +37,6 @@ jobs:
       - name: Run ESLint
         id: eslint
         run: npx eslint "**/*.{js,ts}" --ignore-pattern "coverage/**"
-        continue-on-error: true
 
       - name: Fix permissions for Jest
         run: chmod +x ./node_modules/.bin/jest
@@ -47,12 +44,10 @@ jobs:
       - name: Run Jest
         id: tests
         run: npx jest --coverage
-        continue-on-error: true
 
       - name: Run npm audit
         id: npm-audit
         run: npm audit --audit-level=low
-        continue-on-error: true
 
       - name: Fix permissions for Vite
         run: chmod +x ./node_modules/.bin/vite
@@ -60,7 +55,6 @@ jobs:
       - name: Run Vite Build
         id: vite
         run: npx vite build --mode production
-        continue-on-error: true
 
       - name: Upload coverage folder as artifact
         if: steps.tests.outcome == 'success'
