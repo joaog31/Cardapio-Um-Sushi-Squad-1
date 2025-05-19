@@ -73,10 +73,3 @@ jobs:
         with:
           name: coverage-artifact
           path: coverage/
-
-      - name: Upload .next folder as artifact
-        if: steps.build.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: next-build
-          path: .next
