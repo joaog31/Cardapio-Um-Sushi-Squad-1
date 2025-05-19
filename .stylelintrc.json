@@ -9,7 +9,7 @@
       "property-no-vendor-prefix": null,
       "block-no-empty": true,
       "declaration-block-no-duplicate-properties": true,
-      "selector-max-id": 2,
+      "selector-max-id": 0,
       "selector-pseudo-element-colon-notation": "double"
     }
   }
