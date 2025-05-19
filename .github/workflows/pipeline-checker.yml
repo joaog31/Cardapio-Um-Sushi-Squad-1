@@ -50,7 +50,7 @@ jobs:
 
       - name: Run ESLint
         id: eslint
-        run: npx eslint "**/*.{js,ts}" --ignore-pattern "coverage/**"
+        run: npx eslint "**/*.{js,ts,jsx,tsx}" --ignore-pattern "coverage/**"
 
       - name: Fix permissions for Jest
         run: chmod +x ./node_modules/.bin/jest
@@ -79,4 +79,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: next-build
-          path: '.next/**'
+          path: .next
