@@ -79,5 +79,5 @@ jobs:
           name: coverage-artifact
           path: coverage/
 
-      - name: List root files and folders
-        run: ls -la
+      - name: List .next content before upload
+        run: ls -la .next
