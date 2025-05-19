@@ -5,6 +5,8 @@ module.exports = {
     node: true,
     jest: true,
   },
+  plugins: ['jest'],
+  extends: ['eslint:recommended'],
   parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2020,
@@ -13,15 +15,16 @@ module.exports = {
       jsx: true,
     },
     requireConfigFile: false,
+    babelOptions: {
+      plugins: ['@babel/plugin-syntax-jsx'],
+    },
   },
-  plugins: ['jest'],
-  extends: ['eslint:recommended'],
   rules: {
     'no-console': 'warn',
-    'eqeqeq': 'error',
-    'curly': 'error',
-    'quotes': ['error', 'single'],
-    'semi': ['error', 'always'],
-    'indent': ['error', 2],
+    eqeqeq: 'error',
+    curly: 'error',
+    quotes: ['error', 'single'],
+    semi: ['error', 'always'],
+    indent: ['error', 2],
   },
 };
