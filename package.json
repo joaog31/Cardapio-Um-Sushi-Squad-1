@@ -8,5 +8,11 @@
     "stylelint": "^16.19.1",
     "stylelint-config-standard": "^38.0.0",
     "ts-jest": "^29.3.2"
+  },
+  "scripts": {
+    "build": "next build",
+    "start": "next start",
+    "dev": "next dev"
   }
 }
+
