@@ -67,9 +67,6 @@ jobs:
         id: build
         run: npm run build
 
-      - name: List .next content before upload
-        run: ls -la .next
-
       - name: Upload coverage folder as artifact
         if: steps.tests.outcome == 'success'
         uses: actions/upload-artifact@v4
@@ -82,4 +79,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: next-build
-          path: .next/
+          path: .next/**
