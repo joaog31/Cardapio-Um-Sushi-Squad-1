@@ -24,6 +24,7 @@ jobs:
           stylelint-config-standard \
           stylelint \
           eslint@8 \
+          eslint-config-next \
           jest \
           @types/jest \
           ts-jest \

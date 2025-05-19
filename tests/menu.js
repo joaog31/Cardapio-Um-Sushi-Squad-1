@@ -3,4 +3,4 @@ function addMenuItem(menu, item) {
   return menu;
 }
 
-module.exports = { addMenuItem };
+module.exports = { addMenuItem }

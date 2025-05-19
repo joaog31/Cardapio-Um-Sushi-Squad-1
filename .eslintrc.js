@@ -6,7 +6,7 @@ module.exports = {
     jest: true,
   },
   plugins: ['jest'],
-  extends: ['eslint:recommended'],
+  extends: ['eslint:recommended', 'plugin:jest/recommended', 'next/core-web-vitals'],
   parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2020,
