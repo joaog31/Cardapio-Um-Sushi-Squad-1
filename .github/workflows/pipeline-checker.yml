@@ -15,7 +15,7 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: npm install htmlhint stylelint-config-standard stylelint eslint@8 jest @types/jest ts-jest vite eslint-plugin-jest
+        run: npm install htmlhint stylelint-config-standard stylelint eslint@8 jest @types/jest ts-jest eslint-plugin-jest
 
       - name: Fix permissions for htmlhint
         run: chmod +x ./node_modules/.bin/htmlhint
@@ -49,12 +49,14 @@ jobs:
         id: npm-audit
         run: npm audit --audit-level=low
 
-      - name: Fix permissions for Vite
-        run: chmod +x ./node_modules/.bin/vite
+      - name: Build Next.js
+        run: npm run build
 
-      - name: Run Vite Build
-        id: vite
-        run: npx vite build --mode production
+      - name: Upload .next folder as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-build
+          path: .next
 
       - name: Upload coverage folder as artifact
         if: steps.tests.outcome == 'success'
@@ -62,21 +64,6 @@ jobs:
         with:
           name: coverage-artifact
           path: coverage/
-
-      - name: Upload dist folder as artifact
-        if: steps.vite.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist-artifact
-          path: dist/
-
-      - name: Vite Build passed?
-        if: steps.vite.outcome == 'success'
-        run: echo "Build completed successfully!"
-
-      - name: Vite Build failed?
-        if: steps.vite.outcome == 'failure'
-        run: echo "Build failed, please check the errors!"
 
       - name: Jest passed?
         if: steps.tests.outcome == 'success'
