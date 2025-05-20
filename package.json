@@ -3,5 +3,8 @@
     "build": "next build",
     "start": "next start",
     "dev": "next dev"
+  },
+  "devDependencies": {
+    "htmlhint": "^1.1.4"
   }
 }
