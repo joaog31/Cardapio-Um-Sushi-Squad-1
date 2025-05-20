@@ -1,0 +1,75 @@
+name: pipeline-checker
+on: [workflow_dispatch, push, pull_request]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: |
+          npm install \
+          next \
+          react \
+          react-dom \
+          htmlhint \
+          stylelint-config-standard \
+          stylelint \
+          eslint@8 \
+          eslint-config-next \
+          jest \
+          @types/jest \
+          ts-jest \
+          eslint-plugin-jest \
+          @babel/eslint-parser
+
+      - name: Fix permissions for htmlhint
+        run: chmod +x ./node_modules/.bin/htmlhint
+
+      - name: Run HTMLHint
+        id: htmlhint
+        run: npx htmlhint "**/*.html" --ignore "coverage/**"
+
+      - name: Fix permissions for stylelint
+        run: chmod +x ./node_modules/.bin/stylelint
+
+      - name: Run Stylelint
+        id: stylelint
+        run: npx stylelint '**/*.css' --ignore-pattern "coverage/**"
+
+      - name: Fix permissions for ESLint
+        run: chmod +x ./node_modules/.bin/eslint
+
+      - name: Run ESLint
+        id: eslint
+        run: npx eslint "**/*.{js,ts,jsx,tsx}" --ignore-pattern "coverage/**"
+
+      - name: Fix permissions for Jest
+        run: chmod +x ./node_modules/.bin/jest
+
+      - name: Run Jest
+        id: tests
+        run: npx jest --coverage
+
+      - name: Run npm audit
+        id: npm-audit
+        run: npm audit --audit-level=low
+
+      - name: Build Next.js
+        id: build
+        run: npm run build
+
+      - name: Upload coverage folder as artifact
+        if: steps.tests.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-artifact
+          path: coverage/
