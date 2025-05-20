@@ -25,46 +25,47 @@ jobs:
         working-directory: ./backend
         run: npm install --legacy-peer-deps
 
-      # Lint HTML files (global)
-      - name: Run HTMLHint
+      - name: Run HTMLHint Global
         run: npx htmlhint "./frontend/**/*.html" "./backend/**/*.html" --ignore "coverage/**"
 
-      # Lint CSS files (global)
-      - name: Run Stylelint
+      - name: Run Stylelint Global
         run: npx stylelint "**/*.css" --ignore-pattern "coverage/**"
 
-      # ESLint for backend
       - name: ESLint Backend
         working-directory: ./backend
         run: npx eslint "**/*.{js,ts}" --ignore-pattern "coverage/**"
 
-      # ESLint for frontend
       - name: ESLint Frontend
         working-directory: ./frontend
         run: npx eslint "**/*.{js,ts,jsx,tsx}" --ignore-pattern "coverage/**"
 
-      # Optional root ESLint if configs exist at root
-      - name: Run ESLint (root)
-        run: npx eslint "**/*.{js,ts,jsx,tsx}" --ignore-pattern "coverage/**"
-
-      # Run Jest for backend
-      - name: Run Jest tests (backend)
+      - name: Jest Backend
+        id: backend-jest
         working-directory: ./backend
         run: npx jest --coverage
 
-      # Security audit (root)
+      - name: Jest Frontend
+        id : frontend-jest
+        working-directory: ./frontend
+        run: npx jest --coverage
+
       - name: Run npm audit
         run: npm audit --audit-level=low
 
-      # Build frontend
       - name: Build Next.js frontend
         working-directory: ./frontend
         run: npm run build
 
-      # Upload code coverage as artifact
-      - name: Upload coverage folder as artifact
-        if: success()
+      - name: Upload backend coverage folder as artifact
+        if: steps.backend-jest.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-artifact
+          name: backend-coverage
           path: backend/coverage/
+
+      - name: Upload frontend coverage folder as artifact
+        if: steps.frontend-jest.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage
+          path: frontend/coverage/

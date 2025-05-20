@@ -26,6 +26,5 @@ module.exports = {
     curly: 'error',
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
-    indent: ['error', 2],
   },
 };
