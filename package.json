@@ -5,6 +5,8 @@
     "dev": "next dev"
   },
   "devDependencies": {
-    "htmlhint": "^1.1.4"
+    "htmlhint": "^1.1.4",
+    "stylelint": "^16.19.1",
+    "stylelint-config-standard": "^38.0.0"
   }
 }
