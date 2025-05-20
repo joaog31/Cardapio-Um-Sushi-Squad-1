@@ -48,6 +48,14 @@ jobs:
       - name: Fix permissions for ESLint
         run: chmod +x ./node_modules/.bin/eslint
 
+      - name: ESLint Backend
+        working-directory: ./backend
+        run: npx eslint "**/*.{js,ts}" --ignore-pattern "coverage/**"
+
+      - name: ESLint Frontend
+        working-directory: ./frontend
+        run: npx eslint "**/*.{js,ts,jsx,tsx}" --ignore-pattern "coverage/**"
+
       - name: Run ESLint
         id: eslint
         run: npx eslint "**/*.{js,ts,jsx,tsx}" --ignore-pattern "coverage/**"
