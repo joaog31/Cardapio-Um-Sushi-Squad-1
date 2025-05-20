@@ -1,9 +1,9 @@
 import js from '@eslint/js';
-import next from 'eslint-config-next';
+import next from '@next/eslint-plugin-next';
 
 export default [
   js.configs.recommended,
-  ...next,
+  next.recommended,
   {
     rules: {
       '@next/next/no-html-link-for-pages': 'off',
