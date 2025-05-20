@@ -48,6 +48,10 @@ jobs:
       - name: Fix permissions for ESLint
         run: chmod +x ./node_modules/.bin/eslint
 
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm install
+
       - name: ESLint Backend
         working-directory: ./backend
         run: npx eslint "**/*.{js,ts}" --ignore-pattern "coverage/**"
