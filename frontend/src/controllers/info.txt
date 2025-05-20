@@ -1,0 +1,1 @@
+Lógica que coordena dados entre models e views(pasta app)
