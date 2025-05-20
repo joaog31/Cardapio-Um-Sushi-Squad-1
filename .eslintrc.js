@@ -20,6 +20,7 @@ module.exports = {
     },
   },
   rules: {
+    '@next/next/no-html-link-for-pages': 'off',
     'no-console': 'warn',
     eqeqeq: 'error',
     curly: 'error',

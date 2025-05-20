@@ -21,7 +21,13 @@ export default tseslint.config(
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
-      },
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: {
+          legacyDecorators: true
+        }
+      }
+
     },
   },
   {
