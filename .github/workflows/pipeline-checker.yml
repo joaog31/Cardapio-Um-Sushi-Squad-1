@@ -9,27 +9,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-      - name: Install dependencies
-        run: |
-          npm install \
-          next \
-          react \
-          react-dom \
-          htmlhint \
-          stylelint-config-standard \
-          stylelint \
-          eslint@8 \
-          eslint-config-next \
-          jest \
-          @types/jest \
-          ts-jest \
-          eslint-plugin-jest \
-          @babel/eslint-parser
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm install --legacy-peer-deps
+
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm install --legacy-peer-deps
 
       - name: Fix permissions for htmlhint
         run: chmod +x ./node_modules/.bin/htmlhint
@@ -48,10 +39,6 @@ jobs:
       - name: Fix permissions for ESLint
         run: chmod +x ./node_modules/.bin/eslint
 
-      - name: Install backend dependencies
-        working-directory: ./backend
-        run: npm install
-
       - name: ESLint Backend
         working-directory: ./backend
         run: npx eslint "**/*.{js,ts}" --ignore-pattern "coverage/**"
@@ -60,14 +47,15 @@ jobs:
         working-directory: ./frontend
         run: npx eslint "**/*.{js,ts,jsx,tsx}" --ignore-pattern "coverage/**"
 
-      - name: Run ESLint
+      - name: Run ESLint (root)
         id: eslint
         run: npx eslint "**/*.{js,ts,jsx,tsx}" --ignore-pattern "coverage/**"
 
       - name: Fix permissions for Jest
         run: chmod +x ./node_modules/.bin/jest
 
-      - name: Run Jest
+      - name: Run Jest tests backend
+        working-directory: ./backend
         id: tests
         run: npx jest --coverage
 
@@ -75,7 +63,8 @@ jobs:
         id: npm-audit
         run: npm audit --audit-level=low
 
-      - name: Build Next.js
+      - name: Build Next.js frontend
+        working-directory: ./frontend
         id: build
         run: npm run build
 
