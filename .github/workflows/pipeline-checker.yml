@@ -22,22 +22,13 @@ jobs:
         working-directory: ./backend
         run: npm install --legacy-peer-deps
 
-      - name: Fix permissions for htmlhint
-        run: chmod +x ./node_modules/.bin/htmlhint
-
       - name: Run HTMLHint
         id: htmlhint
         run: npx htmlhint "**/*.html" --ignore "coverage/**"
 
-      - name: Fix permissions for stylelint
-        run: chmod +x ./node_modules/.bin/stylelint
-
       - name: Run Stylelint
         id: stylelint
         run: npx stylelint '**/*.css' --ignore-pattern "coverage/**"
-
-      - name: Fix permissions for ESLint
-        run: chmod +x ./node_modules/.bin/eslint
 
       - name: ESLint Backend
         working-directory: ./backend
@@ -50,9 +41,6 @@ jobs:
       - name: Run ESLint (root)
         id: eslint
         run: npx eslint "**/*.{js,ts,jsx,tsx}" --ignore-pattern "coverage/**"
-
-      - name: Fix permissions for Jest
-        run: chmod +x ./node_modules/.bin/jest
 
       - name: Run Jest tests backend
         working-directory: ./backend
