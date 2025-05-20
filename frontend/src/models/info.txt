@@ -1,1 +1,0 @@
-Schemas, validações, classes de dados, DTOs etc.

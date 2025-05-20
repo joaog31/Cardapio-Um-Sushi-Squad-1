@@ -1,9 +1,14 @@
-import "./globals.css";
+export const metadata = {
+  title: 'Meu Projeto Next.js',
+  description: 'Um projeto Next.js básico',
+};
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`antialiased`}>{children}</body>
+    <html lang="pt-BR">
+      <body>
+        {children}
+      </body>
     </html>
   );
 }
