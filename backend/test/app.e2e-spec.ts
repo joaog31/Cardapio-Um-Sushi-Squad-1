@@ -2,9 +2,9 @@
   @typescript-eslint/no-unsafe-assignment,
   @typescript-eslint/no-unsafe-call,
   @typescript-eslint/no-unsafe-return,
-  @typescript-eslint/no-unsafe-member-access,
-  prettier/prettier
+  @typescript-eslint/no-unsafe-member-access
 */
+
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
