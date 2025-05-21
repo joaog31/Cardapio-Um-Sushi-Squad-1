@@ -33,7 +33,7 @@ jobs:
 
       - name: ESLint Backend
         working-directory: ./backend
-        run: npx eslint "**/*.{js,ts}" --ignore-pattern "coverage/**"
+        run: npx eslint "**/*.{js,ts}" --ignore-pattern "coverage/**" --ignore-pattern "tests/**"
 
       - name: ESLint Frontend
         working-directory: ./frontend
@@ -45,7 +45,7 @@ jobs:
         run: npm test
 
       - name: Jest Frontend
-        id: frontend-jest
+        id: frontend-test
         working-directory: ./frontend
         run: npx jest --coverage --passWithNoTests
 
@@ -64,7 +64,7 @@ jobs:
           path: backend/coverage/
 
       - name: Upload frontend coverage folder as artifact
-        if: steps.frontend-jest.outcome == 'success'
+        if: steps.frontend-test.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: frontend-coverage
