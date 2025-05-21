@@ -23,9 +23,6 @@ describe('AppController (e2e)', () => {
   });
 
   it('/ (GET)', () => {
-    return requestAgent
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+    return requestAgent.get('/').expect(200).expect('Hello World!');
   });
 });
