@@ -1,10 +1,27 @@
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
 import eslintPluginReact from "eslint-plugin-react";
 import eslintPluginReactHooks from "eslint-plugin-react-hooks";
+import js from "@eslint/js";
+import { FlatCompat } from "@eslint/eslintrc";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+});
 
 export default [
   {
     ignores: ["node_modules/**", ".next/**", "coverage/**"],
   },
+
+  ...compat.config({
+    extends: ["eslint:recommended", "plugin:@next/next/recommended"],
+  }),
 
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
@@ -12,9 +29,7 @@ export default [
       parserOptions: {
         ecmaVersion: 2021,
         sourceType: "module",
-        ecmaFeatures: {
-          jsx: true,
-        },
+        ecmaFeatures: { jsx: true },
       },
       globals: {
         React: "readonly",
