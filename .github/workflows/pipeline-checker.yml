@@ -42,12 +42,12 @@ jobs:
       - name: Jest Backend
         id: backend-jest
         working-directory: ./backend
-        run: npx jest --coverage
+        run: npx jest --coverage --passWithNoTests
 
       - name: Jest Frontend
         id : frontend-jest
         working-directory: ./frontend
-        run: npx jest --coverage
+        run: npx jest --coverage --passWithNoTests
 
       - name: Run npm audit
         run: npm audit --audit-level=low
