@@ -39,13 +39,13 @@ jobs:
         working-directory: ./frontend
         run: npx eslint "**/*.{js,ts,jsx,tsx}" --ignore-pattern "coverage/**"
 
-      - name: Jest Backend
-        id: backend-jest
+      - name: Mocha + NYC Backend
+        id: backend-test
         working-directory: ./backend
-        run: npx jest --coverage --passWithNoTests
+        run: npm test
 
       - name: Jest Frontend
-        id : frontend-jest
+        id: frontend-jest
         working-directory: ./frontend
         run: npx jest --coverage --passWithNoTests
 
@@ -57,7 +57,7 @@ jobs:
         run: npm run build
 
       - name: Upload backend coverage folder as artifact
-        if: steps.backend-jest.outcome == 'success'
+        if: steps.backend-test.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: backend-coverage
