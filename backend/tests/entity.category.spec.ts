@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 import { Category, CategoryStatus } from '../src/model/entity.category';
-import 'reflect-metadata';
 
 describe('Category Entity', () => {
   it('should create a Category with given name and status', () => {
