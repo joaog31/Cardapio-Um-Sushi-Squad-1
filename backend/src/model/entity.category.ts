@@ -19,7 +19,7 @@ export class Category {
   }
 }
 
-enum CategoryStatus {
+export enum CategoryStatus {
   AVAILABLE = 'AVAILABLE',
   UNAVAILABLE = 'UNAVAILABLE',
 }
