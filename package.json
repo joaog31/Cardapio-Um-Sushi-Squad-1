@@ -1,8 +1,11 @@
 {
+  "name": "monorepo-utils",
+  "private": true,
   "scripts": {
-    "build": "next build",
-    "start": "next start",
-    "dev": "next dev"
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run start:dev",
+    "lint:html": "npx htmlhint \"./frontend/**/*.html\" \"./backend/**/*.html\" --ignore \"coverage/**\"",
+    "lint:style": "npx stylelint \"**/*.{css,scss}\" --ignore-path .gitignore"
   },
   "devDependencies": {
     "htmlhint": "^1.1.4",
