@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from '../src/app.controller';
+import { AppController } from '../src/controllers/app.controller';
 import { AppService } from '../src/app.service';
 import { expect } from 'chai';
 
