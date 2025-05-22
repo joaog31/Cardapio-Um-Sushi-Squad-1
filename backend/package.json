@@ -13,7 +13,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "node --require reflect-metadata -r ts-node/register -r ./tests/mocha.setup.ts node_modules/mocha/bin/_mocha 'tests/**/*.spec.ts'",
+    "test": "nyc mocha --extension ts -r ts-node/register -r tsconfig-paths/register -r reflect-metadata -r ./tests/mocha.setup.ts tests/**/*.spec.ts",
     "test:dev": "mocha -r ts-node/register 'tests/**/*.spec.ts'"
   },
   "nyc": {
