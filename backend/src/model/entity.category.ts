@@ -28,7 +28,6 @@ export class Category {
   getStatus(): CategoryStatus {
     return this.status;
   }
-  
 }
 
 export enum CategoryStatus {
