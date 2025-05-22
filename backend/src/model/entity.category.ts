@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { v4 as uid } from 'uuid';
 
