@@ -18,6 +18,17 @@ export class Category {
     this.name = name;
     this.status = status;
   }
+
+  getId(): string {
+    return this.id;
+  }
+  getName(): string {
+    return this.name;
+  }
+  getStatus(): CategoryStatus {
+    return this.status;
+  }
+  
 }
 
 export enum CategoryStatus {
