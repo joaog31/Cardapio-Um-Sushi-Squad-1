@@ -17,15 +17,15 @@ jobs:
           cache-dependency-path: '**/package-lock.json'
 
       - name: Install root dev tools
-        run: npm install --legacy-peer-deps
+        run: npm install
 
       - name: Install frontend dependencies
         working-directory: ./frontend
-        run: npm install --legacy-peer-deps
+        run: npm install
 
       - name: Install backend dependencies
         working-directory: ./backend
-        run: npm ci
+        run: npm install
 
       - name: Run HTMLHint Global
         run: npx htmlhint "./frontend/**/*.html" "./backend/**/*.html" --ignore "coverage/**"
