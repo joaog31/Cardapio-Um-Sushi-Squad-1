@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "target": "ES2022",
-    "forceConsistentCasingInFileNames": true,
-    "strict": true
-  },
-  "extends": "./tsconfig.json",
-  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
-}
