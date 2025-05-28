@@ -31,6 +31,6 @@ export class Category {
 }
 
 export enum CategoryStatus {
-  AVAILABLE = 'AVAILABLE',
-  UNAVAILABLE = 'UNAVAILABLE',
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
 }
