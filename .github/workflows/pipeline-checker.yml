@@ -1,0 +1,73 @@
+name: pipeline-checker
+on: [workflow_dispatch, push, pull_request]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Install root dev tools
+        run: npm install
+
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm install
+
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm install
+
+      - name: Run HTMLHint Global
+        run: npx htmlhint "./frontend/**/*.html" "./backend/**/*.html" --ignore "coverage/**"
+
+      - name: Run Stylelint Global
+        run: npx stylelint "**/*.css" --ignore-pattern "coverage/**"
+
+      - name: ESLint Backend
+        working-directory: ./backend
+        run: npx eslint "**/*.{js,ts}" --ignore-pattern "coverage/**" --ignore-pattern "tests/**"
+
+      - name: ESLint Frontend
+        working-directory: ./frontend
+        run: npx eslint "**/*.{js,ts,jsx,tsx}" --ignore-pattern "coverage/**"
+
+      - name: Mocha + NYC Backend
+        id: backend-test
+        working-directory: ./backend
+        run: npm test
+
+      - name: Jest Frontend
+        id: frontend-test
+        working-directory: ./frontend
+        run: npx jest --coverage --passWithNoTests
+
+      - name: Run npm audit
+        run: npm audit --audit-level=low
+
+      - name: Build Next.js frontend
+        working-directory: ./frontend
+        run: npm run build
+
+      - name: Upload backend coverage folder as artifact
+        if: steps.backend-test.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-coverage
+          path: backend/coverage/
+
+      - name: Upload frontend coverage folder as artifact
+        if: steps.frontend-test.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage
+          path: frontend/coverage/
