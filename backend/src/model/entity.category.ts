@@ -3,16 +3,16 @@ export default class Categoria {
   private _nome: string;
   private _status: boolean;
   private _deletedAt: Date | null;
-  private _nomesExistentes: string[];
 
-  constructor(id: number, nome: string, status: boolean = true, nomesExistentes: string[]) {
+  constructor(id: number, nome: string, status: boolean = true) {
+    if (!nome || nome.trim().length === 0) {
+      throw new Error('Nome da categoria é obrigatório');
+    }
+
     this._id = id;
     this._nome = nome;
     this._status = status;
     this._deletedAt = null;
-    this._nomesExistentes = nomesExistentes;
-    
-    this.validarExist(nomesExistentes);
   }
 
   get id(): number {
@@ -24,13 +24,15 @@ export default class Categoria {
   }
 
   set nome(novoNome: string) {
+    if (!novoNome || novoNome.trim().length === 0) {
+      throw new Error('Nome da categoria é obrigatório');
+    }
     this._nome = novoNome;
-    this.validar(novoNome);
   }
-  
+
   set status(novoStatus: boolean) {
-  this._status = novoStatus;
-}
+    this._status = novoStatus;
+  }
 
   get status(): boolean {
     return this._status;
@@ -38,19 +40,6 @@ export default class Categoria {
 
   get deletedAt(): Date | null {
     return this._deletedAt;
-  }
-
- 
-  private validarExist(nomesExistentes: string[]): void {
-    if (!this._nome || this._nome.trim().length === 0) {
-      throw new Error('Nome da categoria é obrigatório');
-    }
-  
-  }
-   private validar(novoNome: string): void {
-    if (novoNome.includes(this._nome.trim())) {
-      throw new Error('Nome da categoria duplicado');
-    }
   }
 
 
@@ -63,7 +52,7 @@ export default class Categoria {
     this._status = false;
   }
 
- 
+
   public deletar(): void {
     this._status = false;
     this._deletedAt = new Date();
