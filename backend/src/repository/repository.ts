@@ -67,7 +67,6 @@ export default class CategoriaRepository {
     return categoria;
   }
 
-
   public delete(id: number): Categoria | undefined {
     const categoria = this.findById(id);
 

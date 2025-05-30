@@ -18,5 +18,6 @@ describe('AppModule', () => {
 
     // Assert
     expect(isModuleDefined).to.be.true;
+
   });
 });
