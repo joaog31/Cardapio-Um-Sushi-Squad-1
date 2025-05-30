@@ -57,11 +57,16 @@ export default class CategoriaRepository {
     const categoria = this.findById(id);
 
     if (categoria) {
-      categoria.status ? categoria.desativar() : categoria.ativar();
+      if (categoria.status) {
+        categoria.desativar();
+      } else {
+        categoria.ativar();
+      }
     }
 
     return categoria;
   }
+
 
   public delete(id: number): Categoria | undefined {
     const categoria = this.findById(id);
