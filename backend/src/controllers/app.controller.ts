@@ -1,5 +1,5 @@
-import CategoriaRepository from "src/repository/repository";
-import Categoria from "src/model/entity.category";
+import CategoriaRepository from 'src/repository/repository';
+import Categoria from 'src/model/entity.category';
 
 export default class CategoriaController {
   constructor(private repository: CategoriaRepository) {}
@@ -20,7 +20,11 @@ export default class CategoriaController {
     return this.repository.create(nome, status);
   }
 
-  public atualizar(id: number, nome: string, status: boolean): Categoria | undefined {
+  public atualizar(
+    id: number,
+    nome: string,
+    status: boolean,
+  ): Categoria | undefined {
     return this.repository.update(id, nome, status);
   }
 

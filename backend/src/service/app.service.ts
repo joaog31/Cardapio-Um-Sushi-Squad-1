@@ -1,8 +1,8 @@
-import CategoriaRepository from "src/repository/repository";
-import Categoria from "src/model/entity.category";
+import CategoriaRepository from 'src/repository/repository';
+import Categoria from 'src/model/entity.category';
 
 export default class CategoriaService {
-  constructor(private repository: CategoriaRepository) { }
+  constructor(private repository: CategoriaRepository) {}
 
   public criarCategoria(nome: string): Categoria {
     if (!nome || nome.trim().length === 0) {
@@ -14,8 +14,11 @@ export default class CategoriaService {
     return this.repository.create(nome.trim(), true);
   }
 
-
-  public atualizarCategoria(id: number, nome: string, status: boolean): Categoria {
+  public atualizarCategoria(
+    id: number,
+    nome: string,
+    status: boolean,
+  ): Categoria {
     if (!nome || nome.trim().length === 0) {
       throw new Error('Nome da categoria é obrigatório');
     }
@@ -29,7 +32,5 @@ export default class CategoriaService {
       throw new Error(`Categoria com ID ${id} não encontrada`);
     }
     return categoria;
-
   }
 }
-

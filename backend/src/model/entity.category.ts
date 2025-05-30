@@ -42,7 +42,6 @@ export default class Categoria {
     return this._deletedAt;
   }
 
-
   public ativar(): void {
     this._status = true;
     this._deletedAt = null;
@@ -52,12 +51,10 @@ export default class Categoria {
     this._status = false;
   }
 
-
   public deletar(): void {
     this._status = false;
     this._deletedAt = new Date();
   }
-
 
   public restaurar(): void {
     this._status = true;
