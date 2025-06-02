@@ -2,15 +2,7 @@
   "name": "monorepo-utils",
   "private": true,
   "scripts": {
-    "dev:frontend": "npm --prefix frontend run dev",
-    "dev:backend": "npm --prefix backend run start:dev",
-    "lint:html": "npx htmlhint \"./frontend/**/*.html\" \"./backend/**/*.html\" --ignore \"coverage/**\"",
-    "lint:style": "npx stylelint \"**/*.{css,scss}\" --ignore-path .gitignore"
-  },
-  "devDependencies": {
-    "htmlhint": "^1.1.4",
-    "stylelint": "^16.19.1",
-    "stylelint-config-standard": "^38.0.0"
+    "dev:backend": "npm --prefix backend run start:dev"
   },
   "dependencies": {
     "typeorm": "^0.3.24",
