@@ -11,7 +11,7 @@ export default [
     tseslint.configs.stylistic
   ),
   {
-    ignores: ['.eslint.config.mjs', '/*.spec.ts', 'jest.setup.ts'],
+    ignores: ['dist/**/*', '.eslint.config.mjs', '**/*.spec.ts', 'jest.setup.ts'],
 
     plugins: {
       sonarjs: sonar,
@@ -40,7 +40,7 @@ export default [
       'max-depth': ['warn', 4],
       'max-nested-callbacks': ['warn', 3],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
-      'jest/require-top-level-describe': 'error', 
+      'jest/require-top-level-describe': 'error',
       'jest/consistent-test-it': ['error', { fn: 'test', withinDescribe: 'it' }],
       'jest/no-disabled-tests': 'warn',
       'jest/no-focused-tests': 'error',
