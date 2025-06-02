@@ -4,17 +4,19 @@ import sonar from 'eslint-plugin-sonarjs';
 import jest from 'eslint-plugin-jest';
 
 export default [
+  {
+    files: ['dist/**/*', 'coverage/**/*', 'tests/**/*', '**/*.spec.ts', 'jest.setup.ts'],
+    ignored: true,
+  },
+
   ...tseslint.config(
     eslint.configs.recommended,
     tseslint.configs.recommended,
     tseslint.configs.strict,
     tseslint.configs.stylistic
   ),
-  {
-    linterOptions: {
-      exclude: ['dist/**/*', '**/*.spec.ts', 'jest.setup.ts'],
-    },
 
+  {
     plugins: {
       sonarjs: sonar,
       jest: jest,
