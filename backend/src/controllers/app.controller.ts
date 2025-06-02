@@ -16,7 +16,7 @@ export default class CategoriaController {
     return this.repository.findById(id);
   }
 
-  public criar(nome: string, status: boolean = true): Categoria {
+  public criar(nome: string, status = true): Categoria {
     return this.repository.create(nome, status);
   }
 

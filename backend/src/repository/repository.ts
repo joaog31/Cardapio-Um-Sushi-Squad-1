@@ -29,7 +29,7 @@ export default class CategoriaRepository {
     );
   }
 
-  public create(nome: string, status: boolean = true): Categoria {
+  public create(nome: string, status = true): Categoria {
     const novaCategoria = new Categoria(this.nextId++, nome, status);
 
     this.categorias.push(novaCategoria);

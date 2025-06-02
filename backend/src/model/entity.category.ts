@@ -4,7 +4,7 @@ export default class Categoria {
   private _status: boolean;
   private _deletedAt: Date | null;
 
-  constructor(id: number, nome: string, status: boolean = true) {
+  constructor(id: number, nome: string, status = true) {
     if (!nome || nome.trim().length === 0) {
       throw new Error('Nome da categoria é obrigatório');
     }
