@@ -11,6 +11,7 @@ export default [
       'tests/**',
       '**/*.spec.ts',
       'jest.setup.ts',
+      'eslint.config.mjs',
     ],
   },
 
@@ -42,6 +43,7 @@ export default [
 
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-extraneous-class': 'off',
       complexity: ['error', { max: 15 }],
       'sonarjs/cognitive-complexity': ['error', 20],
       'max-lines-per-function': ['error', { max: 40, skipComments: false, skipBlankLines: true }],
