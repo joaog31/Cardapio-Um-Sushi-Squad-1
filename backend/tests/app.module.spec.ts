@@ -16,7 +16,7 @@ describe('AppModule', () => {
     // Act
     const isModuleDefined = module !== undefined;
 
-    // Asserts
+    // Assert
     expect(isModuleDefined).to.be.true;
 
   });
