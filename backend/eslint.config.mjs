@@ -11,7 +11,9 @@ export default [
     tseslint.configs.stylistic
   ),
   {
-    ignores: ['dist/**/*', '.eslint.config.mjs', '**/*.spec.ts', 'jest.setup.ts'],
+    linterOptions: {
+      exclude: ['dist/**/*', '**/*.spec.ts', 'jest.setup.ts'],
+    },
 
     plugins: {
       sonarjs: sonar,
