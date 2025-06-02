@@ -25,7 +25,7 @@ jobs:
 
       - name: Build Backend
         working-directory: ./backend
-        run: npm run build
+        run: npx nest build
 
       - name: ESLint Backend
         working-directory: ./backend
