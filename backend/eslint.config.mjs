@@ -5,8 +5,13 @@ import jest from 'eslint-plugin-jest';
 
 export default [
   {
-    files: ['dist/**/*', 'coverage/**/*', 'tests/**/*', '**/*.spec.ts', 'jest.setup.ts'],
-    ignored: true,
+    ignores: [
+      'dist/**',
+      'coverage/**',
+      'tests/**',
+      '**/*.spec.ts',
+      'jest.setup.ts',
+    ],
   },
 
   ...tseslint.config(
