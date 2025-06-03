@@ -17,6 +17,11 @@
     "test:dev": "mocha -r ts-node/register 'tests/**/*.spec.ts'"
   },
   "nyc": {
+    "check-coverage": true,
+    "lines": 75,
+    "branches": 75,
+    "functions": 75,
+    "statements": 75,
     "extension": [
       ".ts"
     ],
