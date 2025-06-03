@@ -41,7 +41,12 @@ export class CategoriaRepository {
     toggleStatus(id: number): Categoria | undefined {
         const categoria = this.findById(id);
         if (categoria) {
-            categoria.status ? categoria.desativar() : categoria.ativar();
+            if (categoria.status) {
+                categoria.desativar();
+            }
+            else {
+                categoria.ativar();
+            }
             return categoria;
         }
         return undefined;
