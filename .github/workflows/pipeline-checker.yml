@@ -56,6 +56,7 @@ jobs:
       - name: Deploy Backend to Railway
         if: ${{ steps.backend-build.conclusion == 'success' && steps.backend-eslint.conclusion == 'success' && steps.backend-test.conclusion == 'success' && steps.npm-audit.conclusion == 'success' }}
         working-directory: ./backend
+        continue-on-error: true
         run: railway up --service b1898c40-417b-41e9-ae8a-9096d4ded847
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
