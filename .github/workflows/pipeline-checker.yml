@@ -50,11 +50,9 @@ jobs:
           name: backend-coverage
           path: backend/coverage/
 
-      - name: Install Railway CLI
-        run: npm install -g railway
-
       - name: Deploy Backend to Railway
         if: ${{ steps.backend-build.conclusion == 'success' && steps.backend-eslint.conclusion == 'success' && steps.backend-test.conclusion == 'success' && steps.npm-audit.conclusion == 'success' }}
-        run: railway up --service b1898c40-417b-41e9-ae8a-9096d4ded847
+        working-directory: ./backend
+        run: npx @railway/cli up --service b1898c40-417b-41e9-ae8a-9096d4ded847
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
