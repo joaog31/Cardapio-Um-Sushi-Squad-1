@@ -59,4 +59,26 @@ export class EntityController {
   alternarStatus(@Param('id') id: string): Produto {
     return this.EntidadeService.alternarStatus(Number(id));
   }
+  @Delete(':id')
+  remover(@Param('id') id: string): Produto {
+    const produto = this.produtoService.remover(Number(id));
+    if (!produto) {
+      throw new HttpException('Produto não encontrado', HttpStatus.NOT_FOUND);
+    }
+    return produto;
+  }
+
+  @Get('deletados')
+  listarDeletados(): Produto[] {
+    return this.produtoService.listarDeletados();
+  }
+
+  @Post(':id/restaurar')
+  restaurar(@Param('id') id: string): Produto {
+    const produto = this.produtoService.restaurarProduto(Number(id));
+    if (!produto) {
+      throw new HttpException('Produto não encontrado ou não está deletado', HttpStatus.NOT_FOUND);
+    }
+    return produto;
+  }
 }
