@@ -125,6 +125,7 @@ export default class Produto {
 
   public desativar(): void {
     this._status = false;
+    this._deletedAt = new Date();
   }
 
   public deletar(): void {
@@ -135,5 +136,9 @@ export default class Produto {
   public restaurar(): void {
     this._status = true;
     this._deletedAt = null;
+
+  }
+  public estaDeletado (): boolean {
+    return this._deletedAt !== null;
   }
 }
