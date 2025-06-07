@@ -36,7 +36,7 @@ export class ProdutoService {
 
     const categoria = this.categoriaService.buscarPorId(categoriaId);
     if (!categoria) throw new Error('Categoria inválida ou inexistente');
-
+    if (!categoria.status) throw new Error('Categoria está desativada');
     return this.repository.create({
       nome: nome.trim(),
       descricao: descricao.trim(),
@@ -63,7 +63,9 @@ export class ProdutoService {
 
     const categoria = this.categoriaService.buscarPorId(categoriaId);
     if (!categoria) throw new Error('Categoria inválida ou inexistente');
+    if (!categoria.status) throw new Error('Categoria está desativada');
 
+    
     const produto = this.repository.update(id, {
       nome: nome.trim(),
       descricao: descricao.trim(),
