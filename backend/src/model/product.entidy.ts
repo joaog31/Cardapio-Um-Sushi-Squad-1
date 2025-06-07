@@ -6,7 +6,7 @@ export default class Produto {
   private _preco: number;
   private _status: boolean;
   private _categoriaId: number;
-  private _deletedAt: Date | null;
+  private _deleted: boolean;
 
   constructor(
     id: number,
@@ -44,7 +44,7 @@ export default class Produto {
     this._preco = preco;
     this._categoriaId = categoriaId;
     this._status = status;
-    this._deletedAt = null;
+    this._deletedAt = false;
   }
 
   get id(): number {
@@ -114,18 +114,18 @@ export default class Produto {
     this._categoriaId = novaCategoriaId;
   }
 
-  get deletedAt(): Date | null {
+  get deletedAt(): boolean {
     return this._deletedAt;
   }
 
   public ativar(): void {
     this._status = true;
-    this._deletedAt = null;
+    this._deletedAt = false;
   }
 
   public desativar(): void {
     this._status = false;
-    this._deletedAt = new Date();
+    this._deletedAt = true;
   }
 
   public deletar(): void {
