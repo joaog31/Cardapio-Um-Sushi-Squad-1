@@ -1,9 +1,11 @@
-import { ProdutoController } from './controllers/product.controller';
-import { ProdutoService } from './service/produto.service';
-import { ProdutoRepository } from './repository/entity.product';
+import { EntityController } from './controllers/entity.controller';
+import { EntidadeService } from './service/entidade.service';
+import { EntityReposity } from './repository/entity.product';
+
 
 @Module({
-  controllers: [ProdutoController],
-  providers: [ProdutoService, ProdutoRepository],
+    imports: [EntityModule],
+  controllers: [EntityController],
+  providers: [EntidadeService, EntityRepository],
 })
 export class AppModule {}
