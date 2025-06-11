@@ -15,11 +15,11 @@ export class CategoriaRepository {
     }
 
     findById(id: number): Categoria | undefined {
-        return this.categorias.find(categoria => categoria.id === id && categoria.status);
+        return this.categorias.find(categoria => categoria.id === id);
     }
 
     findByNome(nome: string): Categoria | undefined {
-        return this.categorias.find(categoria => categoria.nome.trim().toLowerCase() === nome.trim().toLowerCase() && categoria.status);
+        return this.categorias.find(categoria => categoria.nome.trim().toLowerCase() === nome.trim().toLowerCase());
     }
 
     create(nome: string, status: boolean): Categoria {
@@ -41,12 +41,7 @@ export class CategoriaRepository {
     toggleStatus(id: number): Categoria | undefined {
         const categoria = this.findById(id);
         if (categoria) {
-            if (categoria.status) {
-                categoria.desativar();
-            }
-            else {
-                categoria.ativar();
-            }
+            categoria.status = !categoria.status;
             return categoria;
         }
         return undefined;
@@ -61,4 +56,3 @@ export class CategoriaRepository {
         return undefined;
     }
 }
-

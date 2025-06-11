@@ -11,7 +11,7 @@ import { extname } from 'path';
   imports: [CategoriaModule, MulterModule.register({
    storage: diskStorage({
      destination: './uploads',
-     filename: (red, file, cb) => {
+     filename: (req, file, cb) => {
        const date = Date.now();
        const ext = extname(file.originalname);
        const oriName = file.originalname.split('.')[0];
@@ -22,12 +22,12 @@ import { extname } from 'path';
    limits: {
      fileSize: Math.pow(1024, 2) * 10,
    },
- }),],
+ })],
   controllers: [EntityController],
   providers: [
     ProdutoService,
     ProdutoRepository
   ],
-  exports: [ProdutoService],
+  exports: [ProdutoService, ProdutoRepository],
 })
 export class ProdutoModule { }

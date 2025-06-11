@@ -6,6 +6,8 @@ import {
   Delete,
   Param,
   Body,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { CategoriaService } from '../service/categoria.service';
 import Categoria from '../model/categoria.entity';
@@ -16,6 +18,11 @@ export class CategoriaController {
 
   @Get()
   listarTodas(): Categoria[] {
+    return this.service.listarAtivas();
+  }
+
+  @Get('admin')
+  listarTodasAdmin(): Categoria[] {
     return this.service.listarTodas();
   }
 
@@ -49,7 +56,14 @@ export class CategoriaController {
   }
 
   @Delete(':id')
-  remover(@Param('id') id: string): Categoria {
-    return this.service.remover(Number(id));
+  remover(@Param('id') id: string) {
+    try {
+      return this.service.remover(Number(id));
+    } catch (error) {
+      throw new HttpException(
+        { message: error.message },
+        HttpStatus.BAD_REQUEST
+      );
+    }
   }
 }

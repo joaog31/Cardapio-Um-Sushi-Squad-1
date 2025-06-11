@@ -1,5 +1,3 @@
-
-
 export default class Produto {
   private _id: number;
   private _nome: string;
@@ -138,8 +136,8 @@ export default class Produto {
   public restaurar(): void {
     this._status = true;
     this._deletedAt = null;
-
   }
+
   public estaDeletado (): boolean {
     return this._deletedAt !== null;
   }

@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CategoriaRepository } from '../repository/categoria.repository';
 import Categoria from '../model/categoria.entity';
+import ProdutoRepository from 'src/repository/entity.product';
 
 @Injectable()
 export class CategoriaService {
-  constructor(private readonly repository: CategoriaRepository) { }
+  constructor(
+    private readonly repository: CategoriaRepository,
+    private readonly produtoRepository: ProdutoRepository
+  ) { }
 
   listarTodas(): Categoria[] {
     return this.repository.findAll();
@@ -53,6 +57,15 @@ export class CategoriaService {
   }
 
   remover(id: number): Categoria {
+    const produtos = this.produtoRepository.findActive();
+    const produtosVinculados = produtos.filter(produto => produto.categoriaId === id);
+
+    if (produtosVinculados.length > 0) {
+      throw new Error(
+        `Categoria não pode ser desativada pois possui ${produtosVinculados.length} produto(s) ativo(s) vinculado(s)`
+      );
+    }
+
     const categoria = this.repository.delete(id);
     if (!categoria) throw new Error(`Categoria com ID ${id} não encontrada`);
     return categoria;

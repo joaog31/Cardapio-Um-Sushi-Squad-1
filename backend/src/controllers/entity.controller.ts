@@ -47,11 +47,7 @@ export class EntityController {
 
     const parsed = JSON.parse(body.body)
     const { nome, descricao, preco, categoriaId, status } = parsed;
-    const imagem = file.path
-    console.log(file);
-    console.log(imagem);
-    
-    console.log(parsed);
+    const imagem = file.path;
     
     return await this.EntidadeService.criarProduto(nome, descricao, imagem, preco, categoriaId, status);
   }
@@ -60,7 +56,7 @@ export class EntityController {
   @UseInterceptors(FileInterceptor('img'))
   atualizar(@Param('id') id: string, @Body() body: any, @UploadedFile() img: Express.Multer.File): Promise<Produto> {
     const { nome, descricao, preco, status, categoriaId } = body;
-    const imagem = img.path
+    const imagem = img.path;
     return this.EntidadeService.atualizarProduto(
       Number(id),
       nome,
@@ -73,9 +69,10 @@ export class EntityController {
   }
 
   @Patch(':id/status')
-  alternarStatus(@Param('id') id: string, ): Produto {
+  alternarStatus(@Param('id') id: string): Produto {
     return this.EntidadeService.alternarStatus(Number(id));
   }
+
   @Delete(':id')
   remover(@Param('id') id: string): Produto {
     const produto = this.EntidadeService.remover(Number(id));
@@ -84,18 +81,4 @@ export class EntityController {
     }
     return produto;
   }
-//
-//  @Get('deletados')
-//  listarDeletados(): Produto[] {
-//    return this.EntidadeService.listarDeletados();
-//  }
-//
-//  @Post(':id/restaurar')
-//  restaurar(@Param('id') id: string): Produto {
-//    const produto = this.EntidadeService.restaurarProduto(Number(id));
-//    if (!produto) {
-//      throw new HttpException('Produto não encontrado ou não está deletado', HttpStatus.NOT_FOUND);
-//    }
-//    return produto;
-//  }
 }
