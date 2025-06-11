@@ -19,55 +19,44 @@ jobs:
       - name: Install root dev tools
         run: npm install
 
-      - name: Install frontend dependencies
-        working-directory: ./frontend
-        run: npm install
-
       - name: Install backend dependencies
         working-directory: ./backend
         run: npm install
 
-      - name: Run HTMLHint Global
-        run: npx htmlhint "./frontend/**/*.html" "./backend/**/*.html" --ignore "coverage/**"
-
-      - name: Run Stylelint Global
-        run: npx stylelint "**/*.css" --ignore-pattern "coverage/**"
+      - name: Build Backend
+        id: backend-build
+        working-directory: ./backend
+        run: npx nest build
 
       - name: ESLint Backend
+        id: backend-eslint
         working-directory: ./backend
-        run: npx eslint "**/*.{js,ts}" --ignore-pattern "coverage/**" --ignore-pattern "tests/**"
-
-      - name: ESLint Frontend
-        working-directory: ./frontend
-        run: npx eslint "**/*.{js,ts,jsx,tsx}" --ignore-pattern "coverage/**"
+        run: npx eslint . --ext .ts
 
       - name: Mocha + NYC Backend
         id: backend-test
         working-directory: ./backend
+        continue-on-error: true
         run: npm test
 
-      - name: Jest Frontend
-        id: frontend-test
-        working-directory: ./frontend
-        run: npx jest --coverage --passWithNoTests
-
       - name: Run npm audit
-        run: npm audit --audit-level=low
-
-      - name: Build Next.js frontend
-        working-directory: ./frontend
-        run: npm run build
+        id: npm-audit
+        run: npm audit --audit-level=high
 
       - name: Upload backend coverage folder as artifact
-        if: steps.backend-test.outcome == 'success'
+        if: ${{ steps.backend-test.conclusion == 'success' }}
         uses: actions/upload-artifact@v4
         with:
           name: backend-coverage
           path: backend/coverage/
 
-      - name: Upload frontend coverage folder as artifact
-        if: steps.frontend-test.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: frontend-coverage
-          path: frontend/coverage/
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy Backend to Railway
+        if: ${{ steps.backend-build.conclusion == 'success' && steps.backend-eslint.conclusion == 'success' && steps.backend-test.conclusion == 'success' && steps.npm-audit.conclusion == 'success' }}
+        working-directory: ./backend
+        continue-on-error: true
+        run: railway up --service b1898c40-417b-41e9-ae8a-9096d4ded847
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}

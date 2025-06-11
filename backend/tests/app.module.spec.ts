@@ -1,22 +1,14 @@
 import { expect } from 'chai';
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { AppModule } from '../src/app.module';
+import { describe, it } from 'node:test';
 
 describe('AppModule', () => {
-  let module: TestingModule;
-
-  before(async () => {
-    // Arrange
-    module = await Test.createTestingModule({
+  it('should compile the module', async () => {
+    const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
-  });
 
-  it('should compile the module', () => {
-    // Act
-    const isModuleDefined = module !== undefined;
-
-    // Assert
-    expect(isModuleDefined).to.be.true;
+    expect(moduleRef).to.be.ok;
   });
 });

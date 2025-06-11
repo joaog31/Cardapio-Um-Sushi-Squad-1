@@ -1,45 +1,61 @@
 import eslint from '@eslint/js';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import sonar from 'eslint-plugin-sonarjs';
+import jest from 'eslint-plugin-jest';
 
-export default tseslint.config(
+export default [
   {
-    ignores: ['eslint.config.mjs'],
+    ignores: [
+      'dist/**',
+      'coverage/**',
+      'tests/**',
+      '**/*.spec.ts',
+      'jest.setup.ts',
+      'eslint.config.mjs',
+    ],
   },
-  eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  eslintPluginPrettierRecommended,
+
+  ...tseslint.config(
+    eslint.configs.recommended,
+    tseslint.configs.recommended,
+    tseslint.configs.strict,
+    tseslint.configs.stylistic
+  ),
+
   {
+    plugins: {
+      sonarjs: sonar,
+      jest: jest,
+    },
+
     languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.jest,
-      },
-      sourceType: 'commonjs',
       parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        ecmaFeatures: {
-          legacyDecorators: true
-        }
-      }
+        project: './tsconfig.json',
+        tsconfigRootDir: new URL('.', import.meta.url),
+      },
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        NodeJS: 'readonly',
+        jest: 'readonly',
+      },
+    },
 
-    },
-  },
-  {
     rules: {
-      '@next/next/no-html-link-for-pages': 'off',
-      'no-console': 'warn',
-      eqeqeq: 'error',
-      curly: 'error',
-      quotes: ['error', 'single'],
-      semi: ['error', 'always'],
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn'
+      '@typescript-eslint/no-extraneous-class': 'off',
+      complexity: ['error', { max: 15 }],
+      'sonarjs/cognitive-complexity': ['error', 20],
+      'max-lines-per-function': ['error', { max: 40, skipComments: false, skipBlankLines: true }],
+      'max-params': ['warn', 6],
+      'max-depth': ['warn', 4],
+      'max-nested-callbacks': ['warn', 3],
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'jest/require-top-level-describe': 'error',
+      'jest/consistent-test-it': ['error', { fn: 'test', withinDescribe: 'it' }],
+      'jest/no-disabled-tests': 'warn',
+      'jest/no-focused-tests': 'error',
+      'jest/no-identical-title': 'error',
     },
   },
-);
+];

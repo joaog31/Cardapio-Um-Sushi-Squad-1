@@ -1,7 +1,6 @@
 # Cardapio um Sushi
 Esse repositorio servirá para armazenar os arquivos de códigos do projeto Cardápio Um sushi..
-Como desenvolvedor responsável pela documentação inicial do projeto
-Quero criar e estruturar o arquivo README.md contendo o nome de todos os participantes, descrição do projeto e instruções claras de execução local
+Aqui está estruturado o arquivo README.md contendo o nome de todos os participantes, descrição do projeto e instruções claras de execução local
 Para que qualquer pessoa, técnica ou não técnica, consiga entender o propósito do sistema e executar o projeto com facilidade em seu ambiente
 
 <br>
@@ -40,11 +39,12 @@ avaliação do produto onde geralmente é usado uma nota de 1 a 5 estrelas e um 
 
 | Tecnologia | Descrição |
 | --- | --- |
-| Pipeline | Foi utilizado, [`Stylelint`](https://stylelint.io/) com parâmetros configurados em **JavaScript**, [`HTMLHint`](https://htmlhint.com/) com parâmetros configurados em **JSON**, [`ESLint`](https://eslint.org/) com parâmetros em **JSON**  além de um arquivo em **Yaml** para o workflow. |
+| Pipeline | Foi utilizado, [`ESLint`](https://eslint.org/) com parâmetros em **JSON**  além de um arquivo em **Yaml** para o workflow e testes feitos com [`Mocha`](https://mochajs-org.translate.goog/?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=pt&_x_tr_pto=tc) + Chai + NYC. |
+| Deploy | Foi utilizado, de forma automática via token do [`Railway`](https://railway.com) |
+| Build | Foi utilizado, [`NestJS Express`](https://nestjs.com) para Bundler e Build |
+| FrameWork | Foi utilizado, [`NestJS`](https://nestjs.com) em [`TypeScript`](https://www.typescriptlang.org) |
 
 <br>
 
 > [!warning]
 > O projeto ainda está incompleto.
-
-
