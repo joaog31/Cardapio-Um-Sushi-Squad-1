@@ -9,9 +9,12 @@ import {
   HttpException,
   HttpStatus,
   Delete,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ProdutoService } from 'src/service/entidade.service';
 import Produto from 'src/model/product.entidy';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('produtos')
 export class EntityController {
@@ -36,9 +39,17 @@ export class EntityController {
     return produto;
   }
 
-  @Post()
-  async criar(@Body() body: any): Promise<Produto> {
-    const { nome, descricao, imagem, preco, categoriaId, status } = body;
+  @Post('up')
+  @UseInterceptors(FileInterceptor('file'))
+
+  async criar(@Body() body: any, @UploadedFile() file: Express.Multer.File): Promise<Produto> {
+    const parsed = JSON.parse(body.body)
+    const { nome, descricao, preco, categoriaId, status } = parsed;
+    let imagem = file.path
+    console.log(file);
+    
+    console.log(parsed);
+    
     return await this.EntidadeService.criarProduto(nome, descricao, imagem, preco, categoriaId, status);
   }
 
