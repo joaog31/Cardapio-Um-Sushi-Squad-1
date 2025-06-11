@@ -78,7 +78,6 @@ export class ProdutoService {
     if (!produto) throw new Error(`Produto com ID ${id} nao encontrado`);
     return produto;
   }
-
  //public listarDeletados(): Produto[] {
  //  return this.repository.findDeleted();
  //} 
